@@ -1,44 +1,15 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 2.8) 
 
-set(TESTS_FOR_PROJECT webdavclient)
-project(Tests_${TESTS_FOR_PROJECT})
+project(hello_world)
 
-add_definitions("-std=c++11")
+include_directories(include)
 
-option(BUILD_SHARED_LIBS "Build shared instead of static library" OFF)
-option(STATIC_RUNTIME_LIBRARY "Static runtime library" ON)
+set(SOURCE examples/main.cpp)
 
-if(STATIC_RUNTIME_LIBRARY)
-    set(CompilerFlags
-                CMAKE_CXX_FLAGS
-                CMAKE_CXX_FLAGS_DEBUG
-                CMAKE_CXX_FLAGS_RELEASE
-                CMAKE_C_FLAGS
-                CMAKE_C_FLAGS_DEBUG
-                CMAKE_C_FLAGS_RELEASE)
-    foreach(CompilerFlag ${CompilerFlags})
-        string(REPLACE "/MD" "/MT" ${CompilerFlag} "${${CompilerFlag}}")
-    endforeach()
-endif()
+set(SOURCE_LIB sources/print_hello_world.cpp)
 
-if(UNICODE)
-    add_definitions(-D_UNICODE -DUNICODE)
-endif()
+add_library(lib STATIC ${SOURCE_LIB})
 
-if(USE_CPM)
-include(cmake/FindCPM.cmake)
-CPM_AddModule("cpm-catch"
-  GIT_REPOSITORY "https://github.com/designerror/cpm-catch")
-include_directories(${CPM_INCLUDE_DIRS})
-else()
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include/)
-endif()
+add_executable(main ${SOURCE})
 
-file(GLOB ${PROJECT_NAME}_sources "${CMAKE_CURRENT_SOURCE_DIR}/source/*.cpp")
-
-find_package(${TESTS_FOR_PROJECT} REQUIRED)
-include_directories(${${TESTS_FOR_PROJECT}_INCLUDE_DIRS})
-
-add_executable(${PROJECT_NAME} ${${PROJECT_NAME}_sources} ${${PROJECT_NAME}_headers})
-
-target_link_libraries(${PROJECT_NAME} ${CPM_LIBRARIES} ${TESTS_FOR_PROJECT})
+target_link_libraries(main lib)
