@@ -1,5 +1,0 @@
-/Users/Arthur/Desktop/Lab_3/build/CMakeFiles/edit_cache.dir
-/Users/Arthur/Desktop/Lab_3/build/CMakeFiles/rebuild_cache.dir
-/Users/Arthur/Desktop/Lab_3/build/CMakeFiles/main.dir
-/Users/Arthur/Desktop/Lab_3/build/CMakeFiles/test.dir
-/Users/Arthur/Desktop/Lab_3/build/CMakeFiles/lib.dir
