@@ -1,7 +1,6 @@
+#include "../include/print_hello_world.h"
 #include <iostream>
-#include <print_hello_world.h>
 
-void print_hello_world()
-{
-    std::cout << "hello world!" << std::endl;
+void print_hello_world() {
+	std::cout << "Hello, World!" << std::endl;
 }
